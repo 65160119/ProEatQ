@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/auth/login'; // 🔁 เปลี่ยนเป็น URL ของเพื่อนคุณ
+  private apiUrl = 'http://localhost:3000/auth/login'; 
 
   constructor(private http: HttpClient) {}
 
