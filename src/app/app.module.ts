@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { RouterLinkActive, RouterOutlet, RouterLink } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,12 +38,17 @@ import { SuccessComponent } from './pages/success/success.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-     MatFormFieldModule,
-  MatInputModule,
-   NgOtpInputModule,
-   FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgOtpInputModule,
+    ReactiveFormsModule,
     HttpClientModule,
-  ],
+    CommonModule,
+    RouterLinkActive,
+    RouterOutlet,
+    RouterLink,
+
+],
   providers: [],
   bootstrap: [AppComponent]
 })

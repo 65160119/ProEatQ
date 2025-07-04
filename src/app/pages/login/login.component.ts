@@ -1,38 +1,37 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AuthService } from '/EatQ/EatQApp/src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
-  standalone: false,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  standalone:false,
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  @ViewChild('usernameInput') usernameRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('passwordInput') passwordRef!: ElementRef<HTMLInputElement>;
+  loginForm: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
+  onSubmit(): void {
+    if (this.loginForm.invalid) return;
 
-    const username = this.usernameRef.nativeElement.value.trim();
-    const password = this.passwordRef.nativeElement.value;
-
-    if (!username || !password) {
-      alert('กรุณากรอกชื่อผู้ใช้และรหัสผ่าน');
-      return;
-    }
+    const { username, password } = this.loginForm.value;
 
     this.authService.login(username, password).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/']);
+        console.log('Login Success:', res);
+
       },
       error: (err) => {
-        console.error('Login error:', err);
-        alert('เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้หรือรหัสผ่าน');
+        console.error('Login Failed:', err);
+        this.errorMessage = 'Invalid username or password.';
       }
     });
   }
