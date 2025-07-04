@@ -3,7 +3,11 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'push' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <a routerLink="/" style="text-decoration: none; color: inherit; display: block;" class="hover:bg-yellow-100">
+  <mat-toolbar style="cursor: pointer;">
+    Menu
+  </mat-toolbar>
+</a>
     <mat-nav-list>
       <a mat-list-item href="/login">Login</a>
       <a mat-list-item href="#">Setting</a>

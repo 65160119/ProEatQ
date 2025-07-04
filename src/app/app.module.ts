@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +39,8 @@ import { SuccessComponent } from './pages/success/success.component';
      MatFormFieldModule,
   MatInputModule,
    NgOtpInputModule,
+   FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

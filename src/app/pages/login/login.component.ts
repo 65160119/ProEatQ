@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AuthService } from '/EatQ/EatQApp/src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,21 +9,31 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  isUsernameValid: boolean = true;
+  @ViewChild('usernameInput') usernameRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('passwordInput') passwordRef!: ElementRef<HTMLInputElement>;
 
-  onKey(event: KeyboardEvent, field: string): void {
-    const value = (event.target as HTMLInputElement).value;
-    if (field === 'username') {
-      this.isUsernameValid = /^[a-zA-Z0-9]+$/.test(value);
-    }
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(): void {
-    if (!this.isUsernameValid) {
-      alert('Invalid username!');
+  onSubmit(event: Event): void {
+    event.preventDefault();
+
+    const username = this.usernameRef.nativeElement.value.trim();
+    const password = this.passwordRef.nativeElement.value;
+
+    if (!username || !password) {
+      alert('กรุณากรอกชื่อผู้ใช้และรหัสผ่าน');
       return;
     }
 
-    alert('Login submitted!');
+    this.authService.login(username, password).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        alert('เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้หรือรหัสผ่าน');
+      }
+    });
   }
 }
