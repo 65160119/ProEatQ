@@ -7,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrl: './otp.component.scss'
 })
 export class OTPComponent {
+otpValue: string = '';
 
+  otpConfig = {
+    length: 6,
+    allowNumbersOnly: true
+  };
+
+  onOtpChange(value: string): void {
+    this.otpValue = value;
+  }
+
+  submitOtp(): void {
+    console.log('OTP Submitted:', this.otpValue);
+  }
 }
+

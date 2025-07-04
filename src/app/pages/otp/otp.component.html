@@ -1,1 +1,20 @@
-<p>otp works!</p>
+<div class="min-h-screen flex flex-col items-center justify-center bg-teal-300 px-4 py-6">
+  <div class="w-full max-w-md space-y-6 p-6 bg-white rounded-lg shadow">
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900">Enter OTP</h2>
+      <p class="text-sm text-gray-600">We sent a 6-digit code to your phone</p>
+    </div>
+
+    <ng-otp-input
+      [config]="otpConfig"
+      (onInputChange)="onOtpChange($event)">
+    </ng-otp-input>
+
+    <button
+      [disabled]="otpValue.length !== 6"
+      (click)="submitOtp()"
+      class="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-400">
+      Submit
+    </button>
+  </div>
+</div>

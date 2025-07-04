@@ -22,7 +22,7 @@ const routes: Routes = [
       component: OTPComponent,
     },
     {
-      path: 'suc',
+      path: 'success',
       component: SuccessComponent,
     },
   ]
