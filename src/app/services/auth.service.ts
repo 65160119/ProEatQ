@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/auth/login'; 
+  private apiUrl = 'http://localhost:3000/auth/login';
 
   constructor(private http: HttpClient) {}
 
@@ -17,4 +17,22 @@ export class AuthService {
       password
     });
   }
+register(data: {
+  username: string;
+  password: string;
+  password_cf: string;
+  phone_number: string;
+}): Observable<any> {
+  return this.http.post(`${this.apiUrl}/register`, data);
+}
+
+verifyOtp(data: {
+  otp: string;
+  otp_ref: string;
+  secret: string;
+  user_id: number;
+}): Observable<any> {
+  return this.http.post(`${this.apiUrl}/verify-otp`, data);
+}
+
 }
