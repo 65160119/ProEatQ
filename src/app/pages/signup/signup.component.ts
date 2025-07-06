@@ -30,12 +30,12 @@ export class SignupComponent {
       return;
     }
 
-    const { username, phone, password, password_cf } = this.signupForm.value;
+    const { username, phone, password, confirmPassword } = this.signupForm.value;
 
     this.authService.register({
       username,
       password,
-      password_cf,
+      password_cf: confirmPassword,
       phone_number: phone
     }).subscribe({
       next: (res) => {
